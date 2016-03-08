@@ -16,6 +16,8 @@ exports.signUp = function (req, res, next) {
             }
             req.login(user, function(err) {
                 if (err) return next(err);
+                user.password="";
+                user.salt="";
                 return res.send({
                     message: 'Register Success',
                     success: true,
@@ -30,3 +32,21 @@ exports.signUp = function (req, res, next) {
         });
     }
 };
+
+exports.Login = function (req, res) {
+    res.send({
+        success:true,
+        user:req.user
+    });
+};
+
+
+    exports.requiresLogin = function(req, res, next) {
+        if (!req.isAuthenticated()) {
+            return res.status(401).send({
+                message: 'User is not Login！',
+                success: false
+            });
+        }
+        next();
+    };

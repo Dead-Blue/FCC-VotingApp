@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var VoteSchema = new Schema({
+var PollSchema = new Schema({
     creator:{
         type:Schema.ObjectId,
         ref:'User'
@@ -11,7 +11,7 @@ var VoteSchema = new Schema({
     },
     title:{
         type:String,
-        required:'Require Vote Title'
+        required:'Require Poll Title'
     },
     options:[{
         option:String,
@@ -21,5 +21,4 @@ var VoteSchema = new Schema({
         }
     }]
 });
-
-mongoose.model('Vote',VoteSchema);
+mongoose.model('Poll',PollSchema);

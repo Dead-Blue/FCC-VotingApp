@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting App</title>
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+</head>
+<body>
+VoteApp
+<form action="/user" method="post">
+    <span>Username:<input type="text" name="username"></span>
+    <span>Password:<input type="password" name="password"></span>
+    <span>Confirm password:<input type="text"></span>
+    <span>email:<input type="text" name="email"></span>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>
+<form action="/authenticate" method="post">
+    <span>Username:<input type="text" name="username"></span>
+    <span>Password:<input type="password" name="password"></span>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>
+<button onclick="createVote()">createVote</button>
+<button onclick="vote()">vote</button>
+<button onclick="addOption()">addOption</button>
+</body>
+<script>
+    function createVote(){
+        $.ajax({
+            url:'/polls',
+            type:'POST',
+            data:{
+                title:'A test',
+                options:JSON.stringify([
+                    {option:'A',},
+                    {option:'B'},
+                    {option:'C'},
+                    {option:'D'}
+                ])
+                },
+                dataType:'json',
+                success: function (data) {
+                    console.log(data);
+                }
+        })
+    }
+    
+    function addOption(){
+        $.ajax({
+            url:'/poll/56dead5525ad50b02b364e31',
+            type:'PUT',
+            data:{
+                newOption:'newOne'
+                },
+                dataType:'json',
+                success: function (data) {
+                    console.log(data);
+                }
+        })
+    }
+    function vote(){
+        $.ajax({
+            url:'/poll/56dead5525ad50b02b364e31',
+            type:'POST',
+            data:{
+                option:'A'
+                },
+                dataType:'json',
+                success: function (data) {
+                    console.log(data);
+                }
+        })
+    }
+</script>
+</html>
