@@ -10,7 +10,7 @@ exports.signUp = function (req, res, next) {
         user.save(function(err) {
             if(err) {
                 return res.send({
-                    message: 'Register User Failed',
+                    message: 'Register User Failed.,Username is already exist',
                     success: false
                 });
             }
@@ -50,3 +50,8 @@ exports.Login = function (req, res) {
         }
         next();
     };
+
+exports.signOut = function(req, res) {
+	req.logout();
+	res.send({success:true,message:"Sign out success!"});
+};

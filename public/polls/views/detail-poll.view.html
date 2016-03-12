@@ -1,0 +1,60 @@
+<section data-ng-controller="PollsController" data-ng-init="findOne()"  class="jumbotron">
+
+
+		<div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-primary" class="jumbotron">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+			<div>
+			<h1 data-ng-bind="poll.title"></h1>
+		</div>
+	</h4>
+  </div>
+  <div class="panel-body">
+  <ul class="list-group">
+      <li class="list-group-item" data-ng-repeat="option in poll.options">options:{{option.option}}  count:{{option.count}}<a class="btn btn-info btn-sm pull-right" href="#" data-ng-click="vote(poll,option);">vote</a></li>         
+  </ul>
+<a class="btn btn-default" data-ng-click="addNewOption();">addNewOption</a> 
+	<br>
+    <small>
+		<em>Created on</em>
+		<em data-ng-bind="poll.created | date:'mediumDate'"></em>
+		<em>by</em>
+		<em data-ng-bind="poll.creator.username"></em>
+	</small>
+    <div class="container">  <div id="sharrre" data-title="Share" data-url="http://sharrre.com" ></div>
+</div>
+<div data-ng-show="authentication.user._id == poll.creator._id">
+<div class="container"><a class="btn btn-danger" href="#" data-ng-click="delete();">delete this poll</a>
+</div>
+			</div>
+  </div>
+</div>
+            </div>
+            
+            <div class="col-md-8">
+<canvas id="line" class="chart chart-pie" chart-data="data" chart-labels="labels" 
+    chart-legend="true"></canvas>        
+            </div>
+            
+        </div>
+<script>
+  $(document).ready(function(){
+      $('#sharrre').attr('data-url',window.location.href);
+    $('#sharrre').sharrre({
+        share: {
+            facebook: true,
+            twitter: true,
+        },
+        buttons: {
+            facebook: {layout: 'box_count'},
+            twitter: {count: 'vertical'},
+        },
+        hover: function(api, options){
+            $(api.element).find('.buttons').show();
+        }
+    });
+});
+</script>
+</section>

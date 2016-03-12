@@ -1,76 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Voting App</title>
-    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+    <title>VoteApp</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/lib/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="/lib/ng-dialog/css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="/lib/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="/stylesheets/sharrreStyle.css">
 </head>
-<body>
-VoteApp
-<form action="/user" method="post">
-    <span>Username:<input type="text" name="username"></span>
-    <span>Password:<input type="password" name="password"></span>
-    <span>Confirm password:<input type="text"></span>
-    <span>email:<input type="text" name="email"></span>
-    <input type="submit" value="Submit">
-    <input type="reset" value="Reset">
-</form>
-<form action="/authenticate" method="post">
-    <span>Username:<input type="text" name="username"></span>
-    <span>Password:<input type="password" name="password"></span>
-    <input type="submit" value="Submit">
-    <input type="reset" value="Reset">
-</form>
-<button onclick="createVote()">createVote</button>
-<button onclick="vote()">vote</button>
-<button onclick="addOption()">addOption</button>
+<body ng-app="voteApp">
+    
+    <!--Header-->
+    <div ng-include="'/navbar/views/navbar.html'"></div>
+   <!--header end -->
+   
+   <!--main view-->
+   <section ng-view></section>
+   
+<p>This "fcc-voting" app is built by <a href="http://www.freecodecamp.com/dead-blue">@deadblue </a>of freecodecamp, 
+following the instructions of <a href="http://www.freecodecamp.com/challenges/build-a-voting-app">"Basejump: Build a Voting App | Free Code Camp".</a>  
+Github repository: </p>
 </body>
 <script>
-    function createVote(){
-        $.ajax({
-            url:'/polls',
-            type:'POST',
-            data:{
-                title:'A test',
-                options:JSON.stringify([
-                    {option:'A',},
-                    {option:'B'},
-                    {option:'C'},
-                    {option:'D'}
-                ])
-                },
-                dataType:'json',
-                success: function (data) {
-                    console.log(data);
-                }
-        })
-    }
-    
-    function addOption(){
-        $.ajax({
-            url:'/poll/56dead5525ad50b02b364e31',
-            type:'PUT',
-            data:{
-                newOption:'newOne'
-                },
-                dataType:'json',
-                success: function (data) {
-                    console.log(data);
-                }
-        })
-    }
-    function vote(){
-        $.ajax({
-            url:'/poll/56dead5525ad50b02b364e31',
-            type:'POST',
-            data:{
-                option:'A'
-                },
-                dataType:'json',
-                success: function (data) {
-                    console.log(data);
-                }
-        })
-    }
+    window.user = <%- user || 'null' %>;
 </script>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
+<script src="/lib/angular-resource/angular-resource.js"></script>
+<script src="/lib/ng-dialog/js/ngDialog.js"></script>
+<script src="/lib/Chart.js/Chart.min.js"></script>
+<script src="/lib/angular-chart.js/dist/angular-chart.min.js"></script>
+<script src="/lib/Chart.js/Chart.js"></script>
+<script src="/javascripts/jquery.sharrre.min.js"></script>
+<script src="/users/user.js"></script>
+<script src="/users/controller/user.controller.js"></script>
+<script src="/users/services/user.services.js"></script>
+<script src="/navbar/navbar.module.js"></script>
+<script src="/navbar/controller/navbar.controller.js"></script>
+<script src="/index/index.module.js"></script>
+<script src="/index/controller/index.controller.js"></script>
+<script src="/index/route/index.route.js"></script>
+<script src="/polls/polls.js"></script>
+<script src="/polls/route/polls.route.js"></script>
+<script src="/polls/services/polls.services.js"></script>
+<script src="/polls/controller/polls.controller.js"></script>
+<script src="/application.js"></script>
 </html>

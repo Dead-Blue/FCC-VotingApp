@@ -5,7 +5,7 @@ exports.getPollsList = function(req,res){
         if(err)
           return res.status(400).send({
               success:false,
-              message:err
+              message:err.errmsg
           });
         else
           res.send({
@@ -86,7 +86,7 @@ exports.vote = function (req, res) {
         if(err)
             return res.status(400).send({
                 success:false,
-                message:err
+                message:err.errMsg
             });
         else if(!poll)
             return res.status(400).send({
@@ -94,24 +94,40 @@ exports.vote = function (req, res) {
                 message:'find poll ' + id + 'failed'
             });
         else {
-            req.poll = null;
-            for(var i in poll.options) {
-                if(poll.options[i].option===req.body.option) {
-                    poll.options[i].count++;
-                    poll.save(function (err) {
-                        if(err)
-                            res.send({
-                                success:false,
-                                message:'vote failed'
-                            })
-                        else
-                            res.send({
-                                success:true,
-                                poll:poll
-                            })
+            poll.options = req.body.options;
+             poll.save(function(err){
+                if(err)
+                    return res.status(400).send({
+                        success:false,
+                        message:'vote failed'
+                    });
+                else
+                    res.send({
+                        success:true,
+                        poll:poll
                     })
-                }
-            }
+            })
         }
     })
 };
+
+exports.deletePoll = function(req,res) {
+    Poll.findByIdAndRemove(req.poll._id).exec(function(err,poll){
+        if(err){
+            res.send({
+                success:false,
+                message:'delete poll failed'
+            })
+        }
+        res.send({
+            success:true,
+            poll:poll
+        })
+    })
+};
+
+exports.read=function(req,res) {
+    var poll = req.poll;
+    req.poll=null,
+    res.json(poll);
+}

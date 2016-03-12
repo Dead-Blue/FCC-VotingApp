@@ -1,0 +1,26 @@
+<div ng-controller="NavbarController">
+<form  name="signForm">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" ng-model="username" id="username" name="username" placeholder="Username" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" ng-model="password" id="password" name="password" placeholder="Password"  ng-minlength="7"  required>
+  <span class="glyphicon glyphicon-remove"
+                              ng-show="signForm.password.$dirty && !signForm.password.$valid">Password's length must >=7</span>
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">ConfirmPassword</label>
+    <input type="password" class="form-control" ng-model="confirmPassword" id="confirmPassword" placeholder="confirmPassword"  ng-minlength="7"  required>
+     <span class="glyphicon glyphicon-remove" ng-hide=passwordIsConfirm(password,confirmPassword)>confirm and password is not equal</span>
+  </div>
+  <div class="form-group">
+    <label for="Email">Email</label>
+    <input type="email" class="form-control" ng-model="email" id="Email" placeholder="Email" required>
+      <span class="glyphicon glyphicon-remove"
+                              ng-show="signForm.password.$dirty && !signForm.password.$valid">must be email format </span>
+  </div>
+  <button class="btn btn-primary" ng-click="signUp()"  ng-disabled="signForm.$invalid">Submit</button>
+</form>
+</div>

@@ -1,0 +1,18 @@
+<section ng-controller="PollsController" data-ng-init="initMyPolls();" class="jumbotron">
+    <div class="jumbotron">
+       <h1 class="text-center"> Voting App</h1>
+       <h3 class="text-center"><em>Below are your  polls .
+Select a poll to see the results and vote, or <a href="/#!/polls/create"> make a new poll!</a></em></h3>
+    </div>
+    <div ng-show="error">
+        <span>{{error}}</span>
+    </div> 
+    <div class="list group">
+        <div data-ng-repeat="poll in polls | myfilter:authentication.user._id" >
+            <a class="list-group-item"  href={{"#!/polls/"+poll._id}}>{{poll.title}} <span class="pull-right">{{poll.created | date:"MM/dd/yyyy"}}</span></a>
+        </div>
+    </div>
+    <div class="alert alert-danger" data-ng-hide="!polls || polls.length">
+		No polls yet, wht don't you <a href="/#!/polls/create">create one</a>?
+	</div>
+</section>

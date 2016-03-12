@@ -1,0 +1,35 @@
+<div ng ng-controller="NavbarController" >
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/#!/">VoteApp</a>
+    </div>
+    
+    <div class="">
+      <ul class="nav navbar-nav navbar-right">
+        <li class={{linkHome}}><a href="/#!/" >Home</a></li>
+        <!--only authenticated user can see-->
+        <div ng-show="authentication.user" class="nav navbar-nav navbar-right">
+              <li  class={{myPollsLink}}><a href="/#!/polls/myPoll"  data-ng-class="linkMyPolls">My Polls</a></li>
+          <li  class={{newPollsLink}}><a href="/#!/polls/create"  data-ng-class="linkNewPoll">New Poll</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span data-ng-bind="authentication.user.username"></span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a class="btn btn-link" ng-click="signOut()">Sign out</a></li>
+          </ul>
+        </li>
+        </div>
+       <div ng-hide="authentication.user" class="nav navbar-nav navbar-right">
+           <li ng-click="openLogin()">
+          <a class="btn btn-link" > Login</a>
+        </li>
+        <li ng-click="openSignup()">
+            <a class="btn btn-link" >Sign up</a>
+        </li>
+       </div>
+      </ul>
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>

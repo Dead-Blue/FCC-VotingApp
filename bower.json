@@ -1,0 +1,14 @@
+{
+  "name": "voteapp",
+  "varsion": "0.1.0",
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-route": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-mocks": "~1.2",
+    "bootstrap": "latest",
+    "ng-dialog": "~0.5.8",
+    "Chart.js": "~1.0.2",
+    "angular-chart.js": "~0.8.9"
+  }
+}
