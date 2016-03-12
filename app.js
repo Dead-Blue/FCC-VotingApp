@@ -10,10 +10,12 @@ var MongoStore = require('connect-mongo')(session);
 var config = require('./config/config');
 var passport = require('passport');
 var mongoose = require('./config/mongoose');
+var compress = require('compression');
 var app = express();
 var db = mongoose();
 require('./config/passport')();
 // view engine setup
+app.use(compress());
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
@@ -28,6 +30,7 @@ var mongoStore = new MongoStore({
   mongooseConnection: db.connection,
   collection: 'sessions'
 });
+
 app.use(session({
   saveUninitialized: true,
   resave: true,
