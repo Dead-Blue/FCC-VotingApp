@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 var mongoStore = new MongoStore({
-  mongooseConnection: db.connection,
+  url: config.development.db,
   collection: 'sessions'
 });
 
