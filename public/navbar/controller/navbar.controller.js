@@ -54,12 +54,12 @@ angular.module('navbar').controller('NavbarController', ['$scope', 'Authenticati
     $scope.signOut = function () {
         $http.delete('/user').success(function (data, header, config, status) {
             if (data.success === true) {
-                alert(data.message);
+                $scope.showAlert(data.message);
                $scope.authentication.user=null
             }
 
         }).error(function (data, header, config, status) {
-            alert("Sign out Failed");
+             $scope.showAlert("Sign out Failed");
         });
     };
 
@@ -76,14 +76,24 @@ angular.module('navbar').controller('NavbarController', ['$scope', 'Authenticati
         }).success(function (data, header, config, status) {
             //响应成功
             if (data.success === true) {
-                alert('Login Success');
+                $scope.showAlert('Login Success');
                 $scope.closeThisDialog();
                $scope.authentication.user = data.user;
             } else {
-                alert('Login Failed.Error:' + data.message);
+                $scope.showAlert('Login Failed.Error:' + data.message);
             }
         }).error(function (data, header, config, status) {
-            alert('Login Failed.');
+            var errorMessage="";
+            if(!data){
+                data="unknow error";
+            } else {
+                if(!data.message){
+                    errorMessage=data.message
+                } else {
+                    errorMessage=data;
+                }
+            }
+            $scope.showAlert("Login Failed."+errorMessage);
         });
     }
     
@@ -101,20 +111,29 @@ angular.module('navbar').controller('NavbarController', ['$scope', 'Authenticati
         }).success(function (data, header, config, status) {
             //响应成功
             if (data.success === true) {
-                alert('SignUp Success');
+                $scope.showAlert('SignUp Success');
                 $scope.closeThisDialog();
                $scope.authentication.user = data.user;
             } else {
-                alert('SignUp Failed.Error:' + data.message);
+                $scope.showAlert('SignUp Failed.Error:' + data.message);
             }
         }).error(function (data, header, config, status) {
-            alert('SignUp Failed.');
+            $scope.showAlert('SignUp Failed.');
         });
      }
   
   //confirm password
   $scope.passwordIsConfirm =function (password,confirmPassword) {
       return password ===confirmPassword;
+  }
+
+  //提示框
+  $scope.showAlert=function(message){
+      ngDialog.open({
+            template: '/navbar/views/alert.html',
+            className: 'ngdialog-theme-default',
+            data: {message: message}
+        });
   }
 }
 ]);
