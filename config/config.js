@@ -1,6 +1,10 @@
 module.exports = {
   "development": {
-      db:'mongodb://deadblue:nimda@ds011379.mlab.com:11379/fcc-voting-app',
+      db:'mongodb://localhost:27017/fcc-voting-app-development',
       sessionSecret:'development'
+  },
+  "production": {
+      db:'mongodb://localhost:27017/fcc-voting-app-production',
+      sessionSecret:'production'
   }
 };
