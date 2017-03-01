@@ -1,6 +1,6 @@
 var mainApplicaltionModuleName = 'voteApp';
 
-var mainApplicationModule = angular.module(mainApplicaltionModuleName, ['ngResource','ngRoute','user','index','navbar','polls']);
+var mainApplicationModule = angular.module(mainApplicaltionModuleName, ['ngResource','ngRoute','routeStyles','user','index','navbar','polls']);
 mainApplicationModule.config(['$locationProvider',function($locationProvider) {
 	$locationProvider.hashPrefix('!');
 }]);

@@ -9,6 +9,7 @@
     "bootstrap": "latest",
     "ng-dialog": "~0.5.8",
     "Chart.js": "~1.0.2",
-    "angular-chart.js": "~0.8.9"
+    "angular-chart.js": "~0.8.9",
+    "angular-route-styles": "*"
   }
 }

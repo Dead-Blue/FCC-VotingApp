@@ -1,0 +1,21 @@
+.poll-options{
+    margin: 10px auto;
+    height: 50px;
+}
+.poll-detail{
+    margin-left: 20px;
+}
+.poll-detail-footer{
+    text-align: right;
+    float: right;
+}
+.vote-button{
+    vertical-align: middle;
+}
+.clear{
+    clear: both;
+}
+.share{
+    /*国内不支持*/
+    display: none;
+}

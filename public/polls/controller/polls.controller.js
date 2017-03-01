@@ -19,7 +19,7 @@ angular.module('polls').config(['ChartJsProvider', function (ChartJsProvider) {
 		poll.$save(function(resopnse) {
 			$location.path('polls/' + resopnse.poll._id);
 		}, function	(errorResponse) {
-			$scope.error = errorResponse.data.message.message;
+			$scope.error = errorResponse.data.message;
 		});
 	};
 	
@@ -48,7 +48,7 @@ angular.module('polls').config(['ChartJsProvider', function (ChartJsProvider) {
 		$scope.poll.$update(function() {
 			$location.path('polls/' + $scope.poll._id);
 		}, function(errorResponse) {
-			$scope.error = errorResponse.data.message.message;
+			$scope.error = errorResponse.data.message;
 		});
 	};
 	
@@ -73,7 +73,8 @@ angular.module('polls').config(['ChartJsProvider', function (ChartJsProvider) {
 	$scope.poll.$save(function(resopnse) {
 			$location.path('polls/' + resopnse.poll._id);
 		}, function(errorResponse) {
-			$scope.error = errorResponse.data.message.message;
+            
+			$scope.error = errorResponse.data.message;
 		});
 	};
     
@@ -127,12 +128,15 @@ angular.module('polls').config(['ChartJsProvider', function (ChartJsProvider) {
   $scope.addAnOption = function(){
       $scope.Optionslength = $scope.Optionslength +1;
 $('div[id="Options"]').append(
-  $compile('<input type="text" class="form-control" ng-model="optionsModel['+$scope.Optionslength+'].option" placeholder="option">'
+  $compile('<input type="text" class="form-control poll-options" ng-model="optionsModel['+$scope.Optionslength+'].option" placeholder="option">'
   )($scope)
 );
       
   }
     
+
+
+
 }]).filter('myfilter',function() {
     return function(input,param1) {
         var output = [];  
